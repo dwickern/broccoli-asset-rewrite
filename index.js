@@ -106,9 +106,9 @@ AssetRewrite.prototype.rewriteAssetPath = function (string, assetPath, replaceme
    * ["\')>\s] - Match one of "'(\n> exactly one time
    */
 
-  var re = new RegExp('["\'(=]\\s*([^"\'()=]*' + escapeRegExp(assetPath) + '[^"\n\'()\\>=]*)(\\?[^"\')> ]*)?\\s*\\\\*\\s*["\')>\s]', 'g');
+  var re = new RegExp('["\'(=]\\s*((\\.?/)?' + escapeRegExp(assetPath) + '[^"\n\'()\\>=]*)(\\?[^"\')> ]*)?\\s*\\\\*\\s*["\')>\s]', 'g');
   var match = null;
-  
+
   /*
    * This is to ignore matches that should not be changed
    * Any URL encoded match that would be ignored above will be ignored by this: "'()=\

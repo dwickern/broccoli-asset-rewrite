@@ -249,4 +249,38 @@ describe('broccoli-asset-rev', function() {
       confirmOutput(graph.directory, sourcePath + '/output');
     });
   });
+
+  it('ignores remote URLs', function () {
+    var sourcePath = 'tests/fixtures/remote-url';
+    var node = new AssetRewrite(sourcePath + '/input', {
+      replaceExtensions: ['js'],
+      assetMap: {
+        'the.map': 'the-other-map',
+        'app.js': 'http://cdn.absolute.com/app.js'
+      },
+      prepend: '/'
+    });
+
+    builder = new broccoli.Builder(node);
+    return builder.build().then(function (graph) {
+      confirmOutput(graph.directory, sourcePath + '/output');
+    });
+  });
+
+  it('ignores partial matches', function () {
+    var sourcePath = 'tests/fixtures/partial-match';
+    var node = new AssetRewrite(sourcePath + '/input', {
+      replaceExtensions: ['js'],
+      assetMap: {
+        'the.map': 'the-other-map',
+        'app.js': 'http://cdn.absolute.com/app.js'
+      },
+      prepend: '/'
+    });
+
+    builder = new broccoli.Builder(node);
+    return builder.build().then(function (graph) {
+      confirmOutput(graph.directory, sourcePath + '/output');
+    });
+  });
 });
